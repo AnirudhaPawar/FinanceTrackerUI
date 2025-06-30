@@ -1,5 +1,5 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { Router, RouterModule } from '@angular/router';
+import { Router, RouterModule, ActivatedRoute, NavigationEnd } from '@angular/router';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -12,6 +12,8 @@ import { UserDTO } from '../../models/user-dto.model';
 import { UserService } from '../../../features/users/user.service';
 import { MatSidenavContainer } from '@angular/material/sidenav';
 import { AfterViewInit, ChangeDetectorRef } from '@angular/core';
+import { Title } from '@angular/platform-browser';
+import { filter, map, mergeMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-layout',
@@ -30,7 +32,14 @@ import { AfterViewInit, ChangeDetectorRef } from '@angular/core';
   ]
 })
 export class LayoutComponent implements OnInit {
-  constructor(private auth: AuthService, private router: Router, private userService: UserService, private cdr: ChangeDetectorRef) {}
+  constructor(
+    private auth: AuthService, 
+    private router: Router, 
+    private route: ActivatedRoute,
+    private userService: UserService, 
+    private cdr: ChangeDetectorRef,
+    private titleService: Title
+  ) {}
   isSidenavCollapsed = false;
   currentUser?: UserDTO;
   @ViewChild('sidenav', { read: ElementRef }) sidenavElement!: ElementRef;
@@ -66,5 +75,21 @@ export class LayoutComponent implements OnInit {
         this.auth.setUser(this.currentUser);
       });
     }
+
+    this.router.events.pipe(
+      filter(event => event instanceof NavigationEnd),
+      map(() => {
+        let route = this.route;
+        while (route.firstChild) {
+          route = route.firstChild;
+        }
+        return route;
+      }),
+      filter(route => route.outlet === 'primary'),
+      mergeMap(route => route.data)
+    ).subscribe(data => {
+      const title = data['title'] || 'Finance App';
+      this.titleService.setTitle(title);
+    });
   }
 }

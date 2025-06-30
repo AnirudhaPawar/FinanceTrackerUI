@@ -19,33 +19,6 @@ import { TransactionCategorySummaryComponent } from './features/transactions/tra
 import { LayoutComponent } from './shared/layout/layout/layout.component';
 import { UserProfileComponent } from './features/users/user-profile/user-profile.component';
 
-// export const routes: Routes = [
-//   { path: 'login', component: LoginComponent },
-//   {
-//     path: 'dashboard',
-//     component: DashboardComponent,
-//     canActivate: [authGuard]
-//   },
-//   { path: '', redirectTo: 'login', pathMatch: 'full' },
-//   { path: 'categories', component: CategoryListComponent },
-//   { path: 'categories/new', component: CategoryFormComponent },
-//   { path: 'categories/edit/:id', component: CategoryFormComponent },
-//   { path: 'recurring-transactions', component: RecurringTransactionListComponent},
-//   { path: 'recurring-transactions/new', component: RecurringTransactionFormComponent},
-//   { path: 'budgets', component: BudgetListComponent},
-//   { path: 'budgets/new', component:BudgetFormComponent},
-//   { path: 'budgets/edit/:id', component: BudgetFormComponent},
-//   { path: 'budgets/summary', component: BudgetSummaryComponent},
-//   { path: 'users', component: UserListComponent},
-//   { path: 'users/new', component: UserFormComponent},
-//   { path: 'users/edit/:id', component: UserFormComponent},
-//   { path: 'transactions', component: TransactionListComponent },
-//   { path: 'transactions/new', component: TransactionFormComponent },
-//   { path: 'transactions/edit/:id', component: TransactionFormComponent },
-//   { path: 'transactions/summary', component: TransactionSummaryComponent },
-//   { path: 'transactions/category-summary', component: TransactionCategorySummaryComponent }
-// ];
-
 export const routes: Routes = [
   { path: 'login', component: LoginComponent },
   {
@@ -54,26 +27,26 @@ export const routes: Routes = [
     canActivate: [authGuard],
     children: [
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
-      { path: 'profile', component: UserProfileComponent},
-      { path: 'dashboard', component: DashboardComponent },
-      { path: 'categories', component: CategoryListComponent },
-      { path: 'categories/new', component: CategoryFormComponent },
-      { path: 'categories/edit/:id', component: CategoryFormComponent },
-      { path: 'recurring-transactions', component: RecurringTransactionListComponent },
-      { path: 'recurring-transactions/new', component: RecurringTransactionFormComponent },
-      { path: 'recurring-transactions/edit/:id', component: RecurringTransactionFormComponent },
-      { path: 'budgets', component: BudgetListComponent },
-      { path: 'budgets/new', component: BudgetFormComponent },
-      { path: 'budgets/edit/:id', component: BudgetFormComponent },
-      { path: 'budgets/summary', component: BudgetSummaryComponent },
-      { path: 'users', component: UserListComponent },
-      { path: 'users/new', component: UserFormComponent },
-      { path: 'users/edit/:id', component: UserFormComponent },
-      { path: 'transactions', component: TransactionListComponent },
-      { path: 'transactions/new', component: TransactionFormComponent },
-      { path: 'transactions/edit/:id', component: TransactionFormComponent },
-      { path: 'transactions/summary', component: TransactionSummaryComponent },
-      { path: 'transactions/category-summary', component: TransactionCategorySummaryComponent }
+      { path: 'dashboard', component: DashboardComponent, data: { title: 'Dashboard - Finance App' } },
+      { path: 'profile', component: UserProfileComponent, data: { title: 'My Profile - Finance App' } },
+      { path: 'categories', component: CategoryListComponent, data: { title: 'Categories - Finance App' } },
+      { path: 'categories/new', component: CategoryFormComponent, data: { title: 'New Category - Finance App' } },
+      { path: 'categories/edit/:id', component: CategoryFormComponent, data: { title: 'Edit Category - Finance App' } },
+      { path: 'transactions', component: TransactionListComponent, data: { title: 'Transactions - Finance App' } },
+      { path: 'transactions/new', component: TransactionFormComponent, data: { title: 'New Transaction - Finance App' } },
+      { path: 'transactions/edit/:id', component: TransactionFormComponent, data: { title: 'Edit Transaction - Finance App' } },
+      { path: 'transactions/summary', component: TransactionSummaryComponent, data: { title: 'Transaction Summary - Finance App' } },
+      { path: 'transactions/category-summary', component: TransactionCategorySummaryComponent, data: { title: 'Category Summary - Finance App' } },
+      { path: 'recurring-transactions', component: RecurringTransactionListComponent, data: { title: 'Recurring Transactions - Finance App' } },
+      { path: 'recurring-transactions/new', component: RecurringTransactionFormComponent, data: { title: 'New Recurring Transaction - Finance App' } },
+      { path: 'recurring-transactions/edit/:id', component: RecurringTransactionFormComponent, data: { title: 'Edit Recurring Transaction - Finance App' } },
+      { path: 'budgets', component: BudgetListComponent, data: { title: 'Budgets - Finance App' } },
+      { path: 'budgets/new', component: BudgetFormComponent, data: { title: 'New Budget - Finance App' } },
+      { path: 'budgets/edit/:id', component: BudgetFormComponent, data: { title: 'Edit Budget - Finance App' } },
+      { path: 'budgets/summary', component: BudgetSummaryComponent, data: { title: 'Budget Summary - Finance App' } },
+      { path: 'users', component: UserListComponent, data: { title: 'Users - Finance App' } },
+      { path: 'users/new', component: UserFormComponent, data: { title: 'New User - Finance App' } },
+      { path: 'users/edit/:id', component: UserFormComponent, data: { title: 'Edit User - Finance App' } }
     ]
   }
 ];
