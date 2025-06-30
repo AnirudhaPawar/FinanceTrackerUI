@@ -32,7 +32,7 @@ export class RecurringTransactionListComponent implements OnInit {
   }
 
   load() {
-    this.service.getAll().subscribe({
+    this.service.getAllForUser().subscribe({
       next: (data: RecurringTransactionDTO[]) => this.transactions = data,
       error: (err: any) => console.error(err)
     });

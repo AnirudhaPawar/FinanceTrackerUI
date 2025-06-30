@@ -17,6 +17,10 @@ export class RecurringTransactionService {
     return this.http.get<RecurringTransactionDTO[]>(this.api);
   }
 
+  getAllForUser(): Observable<RecurringTransactionDTO[]> {
+    return this.http.get<RecurringTransactionDTO[]>(this.api+"/user");
+  }
+
   // GET a single recurring transaction by ID
   getById(id: number): Observable<RecurringTransactionDTO> {
     return this.http.get<RecurringTransactionDTO>(`${this.api}/${id}`);

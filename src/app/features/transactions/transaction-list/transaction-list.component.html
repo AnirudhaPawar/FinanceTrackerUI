@@ -54,7 +54,7 @@
   </mat-select>
 </mat-form-field>
 
-  <mat-table [dataSource]="transactions" matSort (matSortChange)="onSort($event)" class="mat-elevation-z2 full-width-table">
+  <mat-table [dataSource]="transactions" matSort (matSortChange)="onSort($event)" class="mat-elevation-z2 full-width-table" *ngIf="transactions?.length; else noData">
 
     <!-- Date Column -->
     <ng-container matColumnDef="date">
@@ -107,6 +107,10 @@
     <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
 
   </mat-table>
+
+  <ng-template #noData>
+    <p class="no-data">No transactions found.</p>
+  </ng-template>
 
   <!-- Pagination Controls -->
   <div class="pagination-controls">

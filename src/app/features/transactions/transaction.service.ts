@@ -3,6 +3,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { PagedResponseTransactionDTO } from '../../shared/models/paged-response-transaction-dto.model';
 import { TransactionDTO } from '../../shared/models/transaction-dto.model';
+import { CategoryMonthlySummaryDTO } from '../../shared/models/category-monthly-summary-dto.model';
 
 @Injectable({
   providedIn: 'root'
@@ -45,8 +46,8 @@ export class TransactionService {
     });
   }
 
-  getCategoryMonthlySummary(month: string): Observable<any> {
-    return this.http.get(`${this.api}/category-summary`, {
+  getCategoryMonthlySummary(month: string): Observable<CategoryMonthlySummaryDTO[]> {
+    return this.http.get<CategoryMonthlySummaryDTO[]>(`${this.api}/category-summary`, {
       params: { month }
     });
   }

@@ -28,7 +28,7 @@
   </mat-form-field>
   
 
-  <mat-table [dataSource]="budgets" class="mat-elevation-z2 full-width-table">
+  <mat-table [dataSource]="budgets" class="mat-elevation-z2 full-width-table" *ngIf="budgets?.length; else noData">
     <!-- Category Column -->
     <ng-container matColumnDef="category">
       <mat-header-cell *matHeaderCellDef>Category</mat-header-cell>
@@ -63,4 +63,8 @@
     <mat-header-row *matHeaderRowDef="['category', 'month', 'amount', 'actions']"></mat-header-row>
     <mat-row *matRowDef="let row; columns: ['category', 'month', 'amount', 'actions']"></mat-row>
   </mat-table>
+
+  <ng-template #noData>
+    <p class="no-data">No budgets found.</p>
+  </ng-template>
 </mat-card>

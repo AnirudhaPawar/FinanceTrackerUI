@@ -14,6 +14,7 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatButtonModule } from '@angular/material/button';
 import { BudgetService } from '../budgets/budget.service';
 import { BudgetSummary } from '../../shared/models/budget-summary.model';
+import { CategoryMonthlySummaryDTO } from '../../shared/models/category-monthly-summary-dto.model';
 
 @Component({
   selector: 'app-dashboard',
@@ -28,12 +29,13 @@ import { BudgetSummary } from '../../shared/models/budget-summary.model';
 })
 export class DashboardComponent implements OnInit {
   summary: any = {};
-  categorySummary: any[] = [];
+  categorySummary: CategoryMonthlySummaryDTO[] = [];
   recentTransactions: any[] = [];
   pieChartLabels: string[] = [];
   currentMonth: Date = new Date();
   displayedMonth: string = '';
   budgetSummary: BudgetSummary[] = [];
+  hasChartData = false;
 
   pieChartData: ChartConfiguration<'pie'>['data'] = {
     labels: [],
@@ -84,13 +86,19 @@ export class DashboardComponent implements OnInit {
       .toString()
       .padStart(2, '0')}`;
   
-    this.transactionService.getCategoryMonthlySummary(month).subscribe(data => {
-      this.categorySummary = data;
-      this.pieChartLabels = data.map((d: { categoryName: any; }) => d.categoryName);
-      this.pieChartData.labels = this.pieChartLabels;
-      this.pieChartData.datasets[0].data = data.map((d: { totalAmount: any; }) => d.totalAmount);
-      this.pieChartData.datasets[0].backgroundColor = this.generateColors(data.length);
-    });
+      this.transactionService.getCategoryMonthlySummary(month).subscribe(data => {
+        this.categorySummary = data;
+
+        this.pieChartLabels = data.map(d=> d.categoryName!);
+        const chartData: number[] = data.map(d => d.totalAmount!);
+      
+        this.pieChartData.labels = this.pieChartLabels;
+        this.pieChartData.datasets[0].data = chartData;
+        this.pieChartData.datasets[0].backgroundColor = this.generateColors(data.length);
+      
+        this.hasChartData = chartData.some((val: number) => val > 0);
+      });
+      
   
     this.transactionService.getAll().subscribe(data => {
       const currentMonthStart = new Date(this.currentMonth.getFullYear(), this.currentMonth.getMonth(), 1).getTime();
