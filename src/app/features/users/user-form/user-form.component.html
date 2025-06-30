@@ -1,0 +1,80 @@
+<mat-card class="user-card">
+  <div class="user-header">
+    <h2 class="section-title">
+      {{ editing ? 'Edit User' : 'New User' }}
+    </h2>
+  </div>
+
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" class="user-form">
+    <!-- Username -->
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Username</mat-label>
+      <input matInput formControlName="username" required />
+      <mat-error *ngIf="form.get('username')?.hasError('required')">
+        Username is required.
+      </mat-error>
+    </mat-form-field>
+
+    <!-- First Name -->
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>First Name</mat-label>
+      <input matInput formControlName="firstName" required />
+      <mat-error *ngIf="form.get('firstName')?.hasError('required')">
+        First Name is required.
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Last Name -->
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Last Name</mat-label>
+      <input matInput formControlName="lastName" required />
+      <mat-error *ngIf="form.get('lastName')?.hasError('required')">
+        Last Name is required.
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Contact -->
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Contact</mat-label>
+      <input
+        type="tel"
+        matInput
+        formControlName="contact"
+        maxlength="10"
+        placeholder="Enter 10-digit phone number"
+      />
+      <mat-error *ngIf="form.get('contact')?.hasError('pattern')">
+        Must be a 10-digit number.
+      </mat-error>
+    </mat-form-field>
+    
+
+    <!-- Email -->
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Email</mat-label>
+      <input matInput type="email" formControlName="email" required />
+      <mat-error *ngIf="form.get('email')?.hasError('required')">
+        Email is required.
+      </mat-error>
+      <mat-error *ngIf="form.get('email')?.hasError('email')">
+        Enter a valid email.
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Password -->
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Password</mat-label>
+      <input matInput type="password" formControlName="password" [required]="!editing" />
+      <mat-error *ngIf="form.get('password')?.hasError('required') && !editing">
+        Password is required.
+      </mat-error>
+    </mat-form-field>
+
+    <div class="form-actions">
+      <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">
+        {{ editing ? 'Update' : 'Create' }}
+      </button>
+      <!-- <button mat-button type="button" (click)="cancel()">Cancel</button> -->
+    </div>
+  </form>
+</mat-card>

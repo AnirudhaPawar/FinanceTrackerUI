@@ -1,0 +1,69 @@
+/* Container to center the login card */
+.login-container {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(to bottom right, #f1f8e9, #e3f2fd);
+    padding: 16px;
+    box-sizing: border-box;
+  }
+  
+  /* Login card styles */
+  .login-card {
+    width: 100%;
+    max-width: 400px;
+    padding: 32px 24px;
+    border-radius: 12px;
+    background: linear-gradient(to bottom right, #f1f8e9, #e3f2fd);
+    border-left: 6px solid #2196f3;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+  
+  /* Flex container for icon and app title */
+  .login-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px; /* space between icon and text */
+    margin-bottom: 24px;
+    overflow: visible;
+  }
+  
+  /* Icon sizing and color */
+  .app-icon {
+    font-size: 40px; /* responsive, scalable */
+    color: #4caf50;  /* green accent */
+    line-height: 1;
+    vertical-align: middle; /* align icon vertically */
+    overflow: visible;      /* allow icon to fully show */
+    display: inline-flex;   /* better inline flexbox support */
+    align-items: center;    /* vertically center icon */
+    justify-content: center;  /* prevent vertical spacing issues */
+  }
+  
+  /* Title styling, matching your dashboard */
+  .app-title {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: #1e88e5; /* deep blue */
+  }
+  
+  /* Form fields full width */
+  .full-width {
+    width: 100%;
+  }
+  
+  /* Login button full width */
+  .login-button {
+    margin-top: 24px;
+    width: 100%;
+  }
+  
+  /* Error message styling */
+  .error-message {
+    color: #c62828;
+    margin-top: 12px;
+  }
+  

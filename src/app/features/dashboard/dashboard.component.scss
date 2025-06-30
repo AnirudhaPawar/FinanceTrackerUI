@@ -1,0 +1,153 @@
+.summary-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 16px;
+  height: 100%;
+  color: white;
+  border-radius: 10px;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  transition: transform 0.3s ease;
+}
+
+.summary-card:hover {
+  transform: translateY(-4px);
+}
+
+.income-card {
+  background: linear-gradient(135deg, #66bb6a, #43a047);
+}
+.expense-card {
+  background: #f44336;
+}
+.savings-card {
+  background: linear-gradient(135deg, #42a5f5, #1e88e5);
+}
+
+mat-icon {
+  font-size: 40px;
+  margin-bottom: 8px;
+  overflow: visible;
+}
+
+mat-card {
+  overflow: visible;
+  padding: 16px;
+  border-radius: 8px;
+}
+
+.chart-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  padding: 16px;
+  box-sizing: border-box;
+}
+
+canvas {
+  width: 100% !important;
+  height: 100% !important;
+  max-height: 300px;
+}
+
+.full-width-table {
+  width: 100%;
+  margin-top: 16px;
+}
+
+.text-center {
+  text-align: center;
+}
+
+/* Optional: Responsive grid layout below 960px */
+@media (max-width: 960px) {
+  mat-grid-list[cols="3"],
+  mat-grid-list[cols="10"] {
+    cols: 1 !important;
+  }
+
+  .chart-container {
+    height: auto;
+  }
+}
+
+.month-switcher {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16px;
+  gap: 16px;
+}
+
+.current-month {
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.section-card {
+  margin-bottom: 32px;
+  padding: 20px;
+  border-radius: 10px;
+  background: linear-gradient(to bottom right, #f1f8e9, #e3f2fd); /* Light green-blue */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  border-left: 6px solid #4caf50; /* green accent bar */
+}
+
+.section-title {
+  margin-bottom: 16px;
+  font-size: 1.5rem;
+  color: #1e88e5; /* deep blue */
+  font-weight: 600;
+}
+
+.section-divider {
+  margin: 32px 0;
+}
+
+.full-height {
+  height: 100%;
+}
+
+.mat-card h4 {
+  margin-top: 0;
+}
+
+.mat-card h3, .mat-card h4 {
+  color: #3f51b5;
+}
+
+.full-width-table {
+  width: 100%;
+  margin-top: 16px;
+  background-color: #f9fbe7; /* pale green */
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.full-width-table th {
+  background-color: #aed581; /* light green */
+  color: #1b5e20;
+  font-weight: bold;
+}
+
+.full-width-table td {
+  background-color: #ffffff;
+}
+
+.status-green {
+  color: #2e7d32;
+  font-weight: bold;
+}
+
+.status-red {
+  color: #c62828;
+  font-weight: bold;
+}
+
+.status-orange {
+  color: #ef6c00;
+  font-weight: bold;
+}
+

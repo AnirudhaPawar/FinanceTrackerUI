@@ -1,0 +1,12 @@
+<h2>Category Monthly Summary</h2>
+<form [formGroup]="form" (ngSubmit)="fetchSummary()">
+  <label>Month (YYYY-MM):</label>
+  <input type="month" formControlName="month" />
+  <button type="submit">Fetch</button>
+</form>
+
+<ul>
+  <li *ngFor="let item of summary">
+    {{ item.categoryName }} - {{ item.totalAmount }}
+  </li>
+</ul>

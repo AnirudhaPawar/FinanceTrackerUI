@@ -1,0 +1,72 @@
+<div class="layout-wrapper">
+<mat-toolbar color="primary" class="mat-elevation-z4 app-navbar">
+    <button mat-icon-button (click)="toggleSidenav()">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <mat-icon class="app-icon" aria-hidden="false" aria-label="Finance icon">account_balance_wallet</mat-icon>
+    <span class="app-title">Finance Tracker</span>
+  
+    <span class="spacer"></span>
+  
+    <!-- User icon trigger -->
+    <button mat-icon-button [matMenuTriggerFor]="userMenu">
+      <mat-icon>account_circle</mat-icon>
+    </button>
+  
+    <!-- User dropdown -->
+    <mat-menu #userMenu="matMenu">
+      <button mat-menu-item [routerLink]="'/profile'">
+        <mat-icon>person</mat-icon>
+        <span>Profile</span>
+      </button>
+      <button mat-menu-item (click)="logout()">
+        <mat-icon>logout</mat-icon>
+        <span>Logout</span>
+      </button>
+    </mat-menu>
+  </mat-toolbar>
+  
+  
+  <mat-sidenav-container class="sidenav-container" autosize>
+    <mat-sidenav
+  #sidenav
+  mode="side"
+  [opened]="true"
+  class="app-sidenav"
+  [class.collapsed]="isSidenavCollapsed">
+  
+      <mat-nav-list>
+        <a mat-list-item routerLink="/dashboard" routerLinkActive="active" matTooltip="Dashboard" matTooltipPosition="right">
+          <mat-icon>dashboard</mat-icon>
+          <span class="label" *ngIf="!isSidenavCollapsed">Dashboard</span>
+        </a>
+        <a mat-list-item routerLink="/transactions" routerLinkActive="active" matTooltip="Transactions" matTooltipPosition="right">
+          <mat-icon>receipt</mat-icon>
+          <span class="label" *ngIf="!isSidenavCollapsed">Transactions</span>
+        </a>
+        <a mat-list-item routerLink="/recurring-transactions" routerLinkActive="active" matTooltip="Recurring Transactions" matTooltipPosition="right">
+          <mat-icon>loop</mat-icon>
+          <span class="label" *ngIf="!isSidenavCollapsed">Recurring Transactions</span>
+        </a>
+        <a mat-list-item routerLink="/budgets" routerLinkActive="active" matTooltip="Budgets" matTooltipPosition="right">
+          <mat-icon>account_balance_wallet</mat-icon>
+          <span class="label" *ngIf="!isSidenavCollapsed">Budgets</span>
+        </a>
+        <a mat-list-item routerLink="/users" routerLinkActive="active" matTooltip="Users" matTooltipPosition="right">
+          <mat-icon>people</mat-icon>
+          <span class="label" *ngIf="!isSidenavCollapsed">Users</span>
+        </a>
+        <a mat-list-item routerLink="/categories" routerLinkActive="active" matTooltip="Categories" matTooltipPosition="right">
+          <mat-icon>category</mat-icon>
+          <span class="label" *ngIf="!isSidenavCollapsed">Categories</span>
+        </a>
+      </mat-nav-list>
+    </mat-sidenav>
+  
+    <mat-sidenav-content>
+      <router-outlet></router-outlet>
+    </mat-sidenav-content>
+    
+  </mat-sidenav-container>
+</div>
+  

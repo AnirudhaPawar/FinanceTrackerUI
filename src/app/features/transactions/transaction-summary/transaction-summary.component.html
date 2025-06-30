@@ -1,0 +1,16 @@
+<h2>Transaction Summary</h2>
+<form [formGroup]="form" (ngSubmit)="fetchSummary()">
+  <label>Start Date:</label>
+  <input type="date" formControlName="start" />
+
+  <label>End Date:</label>
+  <input type="date" formControlName="end" />
+
+  <button type="submit">Fetch</button>
+</form>
+
+<div *ngIf="summary">
+  <p>Total Income: {{ summary.totalIncome }}</p>
+  <p>Total Expense: {{ summary.totalExpense }}</p>
+  <p>Net Savings: {{ summary.netSavings }}</p>
+</div>

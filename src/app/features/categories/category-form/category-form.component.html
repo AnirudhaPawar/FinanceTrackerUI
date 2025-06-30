@@ -1,0 +1,21 @@
+<mat-card class="entity-card">
+  <div class="entity-header">
+    <h2 class="section-title">{{ editing ? 'Edit Category' : 'New Category' }}</h2>
+  </div>
+
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" class="entity-form">
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Name</mat-label>
+      <input matInput id="name" formControlName="name" required />
+      <mat-error *ngIf="form.get('name')?.hasError('required')">
+        Name is required.
+      </mat-error>
+    </mat-form-field>
+
+    <div class="form-actions">
+      <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">
+        {{ editing ? 'Update' : 'Save' }}
+      </button>
+    </div>
+  </form>
+</mat-card>

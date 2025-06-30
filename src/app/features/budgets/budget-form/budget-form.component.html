@@ -1,0 +1,33 @@
+<mat-card class="budget-form-card">
+  <h2 class="form-title">{{ editing ? 'Edit Budget' : 'New Budget' }}</h2>
+
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" class="budget-form">
+
+    <!-- Category Selector -->
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Category</mat-label>
+      <mat-select formControlName="categoryId" required>
+        <mat-option *ngFor="let c of categories" [value]="c.id">{{ c.name }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <!-- Month Picker -->
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Month</mat-label>
+      <input matInput [matDatepicker]="monthPicker" formControlName="month" readonly>
+      <mat-datepicker-toggle matSuffix [for]="monthPicker"></mat-datepicker-toggle>
+      <mat-datepicker #monthPicker startView="multi-year" (monthSelected)="chosenMonthHandler($event, monthPicker)" panelClass="month-picker" [startAt]="startDate" [startView]="'year'" [touchUi]="false"></mat-datepicker>
+    </mat-form-field>
+
+    <!-- Amount -->
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Amount</mat-label>
+      <input matInput type="number" formControlName="amount" min="0.01" required>
+    </mat-form-field>
+
+    <!-- Submit Button -->
+    <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">
+      {{ editing ? 'Update' : 'Save' }}
+    </button>
+  </form>
+</mat-card>

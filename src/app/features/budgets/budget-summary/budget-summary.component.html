@@ -1,0 +1,50 @@
+<mat-card class="budget-card">
+  <div class="budget-header">
+    <h2 class="section-title">Budget Summary</h2>
+    <mat-form-field appearance="fill" class="month-picker-field">
+      <mat-label>Select Month</mat-label>
+      <input matInput [matDatepicker]="picker" [value]="month | date: 'MMM yyyy'" readonly>
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker
+        #picker
+        startView="multi-year"
+        (monthSelected)="chosenMonthHandler($event, picker)"
+        panelClass="month-picker"
+        [startAt]="month"
+        [startView]="'year'"
+        [touchUi]="false">
+      </mat-datepicker>
+    </mat-form-field>
+  </div>
+
+  <mat-table [dataSource]="summary" class="mat-elevation-z2 full-width-table">
+
+    <ng-container matColumnDef="category">
+      <mat-header-cell *matHeaderCellDef>Category</mat-header-cell>
+      <mat-cell *matCellDef="let item">{{ item.category }}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="budgeted">
+      <mat-header-cell *matHeaderCellDef>Budgeted</mat-header-cell>
+      <mat-cell *matCellDef="let item">{{ item.budgeted | currency }}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="spent">
+      <mat-header-cell *matHeaderCellDef>Spent</mat-header-cell>
+      <mat-cell *matCellDef="let item">{{ item.spent | currency }}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="remaining">
+      <mat-header-cell *matHeaderCellDef>Remaining</mat-header-cell>
+      <mat-cell *matCellDef="let item">{{ item.remaining | currency }}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="status">
+      <mat-header-cell *matHeaderCellDef>Status</mat-header-cell>
+      <mat-cell *matCellDef="let item">{{ item.status }}</mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+  </mat-table>
+</mat-card>

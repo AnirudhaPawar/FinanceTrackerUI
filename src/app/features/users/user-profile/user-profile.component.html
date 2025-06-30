@@ -1,0 +1,68 @@
+<mat-card class="profile-card animate-fade-in">
+  <mat-card-header>
+    <div mat-card-avatar class="profile-avatar">
+      <mat-icon>person</mat-icon>
+    </div>
+    <mat-card-title class="profile-title">User Profile</mat-card-title>
+  </mat-card-header>
+
+  <mat-card-content class="profile-content" *ngIf="user">
+    <div class="profile-details-grid">
+
+      <div class="profile-row">
+        <mat-icon class="profile-icon">person</mat-icon>
+        <div class="profile-label">
+          <strong>Username:</strong>
+          <span>{{ user.username }}</span>
+        </div>
+      </div>
+
+      <div class="profile-row">
+        <mat-icon class="profile-icon">person</mat-icon>
+        <div class="profile-label">
+          <strong>First Name:</strong>
+          <span>{{ user.firstName }}</span>
+        </div>
+      </div>
+
+      <div class="profile-row">
+        <mat-icon class="profile-icon">person</mat-icon>
+        <div class="profile-label">
+          <strong>Last Name:</strong>
+          <span>{{ user.lastName }}</span>
+        </div>
+      </div>
+
+      <div class="profile-row">
+        <mat-icon class="profile-icon">email</mat-icon>
+        <div class="profile-label">
+          <strong>Email:</strong>
+          <span>{{ user.email }}</span>
+        </div>
+      </div>
+
+      <div class="profile-row">
+        <mat-icon class="profile-icon">phone</mat-icon>
+        <div class="profile-label">
+          <strong>Contact:</strong>
+          <span>{{ user.contact }}</span>
+        </div>
+      </div>
+
+      <div class="profile-row">
+        <mat-icon class="profile-icon">calendar_today</mat-icon>
+        <div class="profile-label">
+          <strong>Joined:</strong>
+          <span>{{ user.createdAt | date: 'longDate' }}</span>
+        </div>
+      </div>
+
+    </div>
+  </mat-card-content>
+
+  <mat-card-actions align="end">
+    <button mat-raised-button color="primary" (click)="editUser(user?.id)">
+      <mat-icon>edit</mat-icon> Edit Profile
+    </button>
+  </mat-card-actions>
+</mat-card>

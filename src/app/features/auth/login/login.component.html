@@ -1,0 +1,33 @@
+<div class="login-container">
+  <mat-card class="login-card">
+    <div class="login-header">
+      <mat-icon class="app-icon" aria-hidden="false" aria-label="Finance icon">
+        account_balance_wallet
+      </mat-icon>
+      <span class="app-title">Finance Tracker</span>
+    </div>
+
+    <h2 class="login-title">Login</h2>
+    
+    <form (ngSubmit)="onSubmit()" class="login-form">
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Username</mat-label>
+        <input matInput [(ngModel)]="form.username" name="username" required />
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Password</mat-label>
+        <input matInput [(ngModel)]="form.password" name="password" type="password" required />
+      </mat-form-field>
+
+      <button mat-raised-button color="primary" type="submit" class="login-button">
+        Login
+      </button>
+    </form>
+
+    <p *ngIf="errorMessage" class="error-message">{{ errorMessage }}</p>
+    <p *ngIf="sessionExpired" class="error-message">
+      Your session has expired. Please log in again.
+    </p>
+  </mat-card>
+</div>
