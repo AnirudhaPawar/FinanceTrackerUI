@@ -132,8 +132,8 @@ export class TransactionListComponent implements OnInit {
 
     loadTransactionsForSelectedMonth(): void {
       const [year, month] = this.selectedMonth.split('-').map(Number);
-      const startDate = new Date(year, month - 1, 1).toISOString().split('T')[0];
-      const endDate = new Date(year, month, 1).toISOString().split('T')[0];
+      const startDate = this.formatDate(new Date(year, month - 1, 1));
+      const endDate = this.getLastDayOfMonth(year, month - 1);
       this.loadTransactions(startDate, endDate);
     }
 
@@ -180,33 +180,39 @@ export class TransactionListComponent implements OnInit {
   
     switch (this.selectedFilter) {
       case 'current':
-        startDate = new Date(now.getFullYear(), now.getMonth(), 1).toISOString().split('T')[0];
-        endDate = new Date(now.getFullYear(), now.getMonth() + 1, 1).toISOString().split('T')[0];
+        startDate = this.formatDate(new Date(now.getFullYear(), now.getMonth(), 1));
+        endDate = this.getLastDayOfMonth(now.getFullYear(), now.getMonth());
         break;
+    
       case 'last1':
-        startDate = new Date(now.getFullYear(), now.getMonth() - 1, 1).toISOString().split('T')[0];
-        endDate = new Date(now.getFullYear(), now.getMonth(), 1).toISOString().split('T')[0];
+        startDate = this.formatDate(new Date(now.getFullYear(), now.getMonth() - 1, 1));
+        endDate = this.getLastDayOfMonth(now.getFullYear(), now.getMonth() - 1);
         break;
+    
       case 'last3':
-        startDate = new Date(now.getFullYear(), now.getMonth() - 2, 1).toISOString().split('T')[0];
-        endDate = new Date(now.getFullYear(), now.getMonth() + 1, 1).toISOString().split('T')[0];
+        startDate = this.formatDate(new Date(now.getFullYear(), now.getMonth() - 2, 1));
+        endDate = this.getLastDayOfMonth(now.getFullYear(), now.getMonth());
         break;
+    
       case 'last6':
-        startDate = new Date(now.getFullYear(), now.getMonth() - 5, 1).toISOString().split('T')[0];
-        endDate = new Date(now.getFullYear(), now.getMonth() + 1, 1).toISOString().split('T')[0];
+        startDate = this.formatDate(new Date(now.getFullYear(), now.getMonth() - 5, 1));
+        endDate = this.getLastDayOfMonth(now.getFullYear(), now.getMonth());
         break;
+    
       case 'last12':
-        startDate = new Date(now.getFullYear(), now.getMonth() - 11, 1).toISOString().split('T')[0];
-        endDate = new Date(now.getFullYear(), now.getMonth() + 1, 1).toISOString().split('T')[0];
+        startDate = this.formatDate(new Date(now.getFullYear(), now.getMonth() - 11, 1));
+        endDate = this.getLastDayOfMonth(now.getFullYear(), now.getMonth());
         break;
+    
       case 'custom':
         if (this.customMonth) {
           const [year, month] = this.customMonth.split('-').map(Number);
-          startDate = new Date(year, month - 1, 1).toISOString().split('T')[0];
-          endDate = new Date(year, month, 1).toISOString().split('T')[0];
+          startDate = `${year}-${month.toString().padStart(2, '0')}-01`;
+          endDate = this.getLastDayOfMonth(year, month - 1);
         }
         break;
     }
+    
 
     if (this.selectedFilter === 'custom' && this.customMonth) {
       this.selectedMonth = this.customMonth;
@@ -218,6 +224,20 @@ export class TransactionListComponent implements OnInit {
     if (startDate && endDate) {
       this.loadTransactions(startDate, endDate);
     }
+  }
+
+  private formatDate(date: Date): string {
+    const year = date.getFullYear();
+    const month = (date.getMonth() + 1).toString().padStart(2, '0');
+    return `${year}-${month}-01`;
+  }
+  
+  private getLastDayOfMonth(year: number, month: number): string {
+    const lastDay = new Date(year, month + 1, 0); // 0 = last day of previous month
+    const yyyy = lastDay.getFullYear();
+    const mm = (lastDay.getMonth() + 1).toString().padStart(2, '0');
+    const dd = lastDay.getDate().toString().padStart(2, '0');
+    return `${yyyy}-${mm}-${dd}`;
   }
 
   generateLast12Months(): void {
