@@ -1,3 +1,27 @@
+<mat-card class="insight-card animate-fade-in">
+  <mat-card-header>
+    <div mat-card-avatar class="insight-avatar">
+      <mat-icon>insights</mat-icon>
+    </div>
+    <mat-card-title class="insight-title">Smart Insights</mat-card-title>
+  </mat-card-header>
+
+  <mat-card-content class="insight-content" *ngIf="insights?.length; else noInsights">
+    <div class="insight-grid">
+      <div class="insight-row" *ngFor="let insight of insights">
+        <mat-icon class="insight-icon">arrow_forward</mat-icon>
+        <div class="insight-text">{{ insight }}</div>
+      </div>
+    </div>
+  </mat-card-content>
+
+  <ng-template #noInsights>
+    <mat-card-content>
+      <p class="no-data">No insights available at the moment.</p>
+    </mat-card-content>
+  </ng-template>
+</mat-card>
+
 <!-- Month Switcher -->
 <div class="month-switcher">
   <button mat-raised-button color="primary" (click)="prevMonth()">← Prev</button>

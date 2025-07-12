@@ -15,6 +15,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { BudgetService } from '../budgets/budget.service';
 import { BudgetSummary } from '../../shared/models/budget-summary.model';
 import { CategoryMonthlySummaryDTO } from '../../shared/models/category-monthly-summary-dto.model';
+import { InsightsService } from '../insights/insights.service';
+import { MatListModule } from '@angular/material/list';
 
 @Component({
   selector: 'app-dashboard',
@@ -23,6 +25,7 @@ import { CategoryMonthlySummaryDTO } from '../../shared/models/category-monthly-
     MatToolbarModule,
     MatDividerModule,
     MatButtonModule,
+    MatListModule,
     NgChartsModule],
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss'],
@@ -36,6 +39,7 @@ export class DashboardComponent implements OnInit {
   displayedMonth: string = '';
   budgetSummary: BudgetSummary[] = [];
   hasChartData = false;
+  insights: string[] = [];
 
   pieChartData: ChartConfiguration<'pie'>['data'] = {
     labels: [],
@@ -57,11 +61,16 @@ export class DashboardComponent implements OnInit {
   };
 
   constructor(private transactionService: TransactionService,
-    private budgetService: BudgetService
+    private budgetService: BudgetService,
+    private insightsService: InsightsService
   ) {}
 
   ngOnInit(): void {
     this.loadDashboardData();
+    this.insightsService.getUserInsights().subscribe({
+      next: (data) => this.insights = data,
+      error: (err) => console.error('Insight loading failed', err)
+    });
   }
 
   generateColors(count: number): string[] {

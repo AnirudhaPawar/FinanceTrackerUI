@@ -18,6 +18,7 @@ import { TransactionSummaryComponent } from './features/transactions/transaction
 import { TransactionCategorySummaryComponent } from './features/transactions/transaction-category-summary/transaction-category-summary.component';
 import { LayoutComponent } from './shared/layout/layout/layout.component';
 import { UserProfileComponent } from './features/users/user-profile/user-profile.component';
+import { InsightsComponent } from './features/insights/insights/insights.component';
 
 export const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -46,7 +47,8 @@ export const routes: Routes = [
       { path: 'budgets/summary', component: BudgetSummaryComponent, data: { title: 'Budget Summary - Finance App' } },
       { path: 'users', component: UserListComponent, data: { title: 'Users - Finance App' } },
       { path: 'users/new', component: UserFormComponent, data: { title: 'New User - Finance App' } },
-      { path: 'users/edit/:id', component: UserFormComponent, data: { title: 'Edit User - Finance App' } }
+      { path: 'users/edit/:id', component: UserFormComponent, data: { title: 'Edit User - Finance App' } },
+      { path: 'insights', component: InsightsComponent, data: { title: 'Finance Insights - Finance App' } }
     ]
   }
 ];
